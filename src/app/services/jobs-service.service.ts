@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Jobs } from '../interfaces/jobs.interface';
 import { Observable } from 'rxjs';
 import { JobsDetails } from '../interfaces/jobsDetails.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JobsServiceService {
 
-  private URL: String = "http://localhost:4200/";
+  private baseUrl: String = environment.baseUrl;
   isFavIconSelected = "";
   public faviourites: number[] = [];
 
@@ -19,7 +20,7 @@ export class JobsServiceService {
   constructor(private http: HttpClient) { }
 
   public getJobs(): Observable<Jobs[]> {
-    return this.http.get<Jobs[]>(this.URL + 'jobs');
+    return this.http.get<Jobs[]>(this.baseUrl + 'jobs');
   }
 
   public getJobsList(data: Jobs[]) {
@@ -27,7 +28,7 @@ export class JobsServiceService {
   }
 
   public getJobDetails(id: string | null): Observable<JobsDetails> {
-    return this.http.get<JobsDetails>(this.URL + 'jobs/' + id);
+    return this.http.get<JobsDetails>(this.baseUrl + 'jobs/' + id);
   }
 
   public setItem(setName: string,storeFaviourites: string) {
