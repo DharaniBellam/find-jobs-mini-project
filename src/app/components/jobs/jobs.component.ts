@@ -30,12 +30,14 @@ export class JobsComponent implements OnInit, OnDestroy {
     this.getJobs();
   }
   public setFilteredJobList() {
-    let favList = this.jobsServiceService.getItem("faviourites");
+    let favList = this.jobsServiceService.getItem('faviourites');
 
     if (this.componentType === 'favouritesComponent') {
-      this.filteredJobList = this.jobList?.filter((data) => {
-        return favList?.indexOf(data.id.toString()) !== -1;
-      });
+      if (favList?.length) {
+        this.filteredJobList = this.jobList?.filter((data) => {
+          return favList?.indexOf(data.id.toString()) !== -1;
+        });
+      }
 
       if (this.filteredJobList?.length == 0 || favList == null) {
         this.message = "No faviourite selected";
@@ -44,13 +46,16 @@ export class JobsComponent implements OnInit, OnDestroy {
       }
     } else if (this.componentType === 'jobsComponent') {
       this.filteredJobList = this.jobList;
-      this.filteredJobList?.filter((data) => {
-        if (favList?.indexOf(data.id.toString()) !== -1) {
-          if (data.id) {
-            data.hasActive = (favList?.indexOf(data.id.toString()) !== -1);
+      if (favList?.length) {
+        this.filteredJobList?.filter((data) => {
+          if (favList?.indexOf(data.id.toString()) !== -1) {
+            if (data.id) {
+              data.hasActive = true;
+            }
           }
-        }
-      });
+        });
+      }
+
     }
 
   }
