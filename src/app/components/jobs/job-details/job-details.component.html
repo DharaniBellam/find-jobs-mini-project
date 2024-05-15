@@ -1,0 +1,39 @@
+<app-dashboard></app-dashboard>
+<div class="w-100 m-auto p-4"  *ngIf="jobIdDetails | async; let jobIdDetails">
+    <button  type="button" class="btn btn-secondary btn-sm"  routerLink="/jobs"> Back</button>
+    <div class="d-flex mt-3" >
+        <div class="images">
+            <img [src]="jobIdDetails?.companyLogo" alt="company logo" class="companylogo">
+        </div>
+        <div class="content align-self-center">
+            <h2 class="fw-bold">
+                {{jobIdDetails?.companyName}} - {{ jobIdDetails?.title }}</h2>
+
+            <ng-container *ngFor="let type of jobIdDetails?.types">
+                <span class="badge text-bg-primary m-2">
+                    {{type}}
+                </span>
+            </ng-container>
+            <ng-container *ngFor="let industrie of jobIdDetails?.industries">
+                <span class="badge text-bg-primary m-2">
+                    {{industrie}}
+                </span>
+            </ng-container>
+        </div>
+    </div>
+    <div class="m-3">
+        <div>
+            <span class="fw-bold"> Publish Date:</span> {{jobIdDetails?.publishDate}}
+        </div>
+        <div>
+            <span class="fw-bold"> Location:</span> {{jobIdDetails?.location}}
+        </div>
+        <div>
+            <span class="fw-bold"> Reference:</span> {{jobIdDetails?.reference}}
+        </div>
+    </div>
+    <div class="m-3">
+        <span class="fw-bold">  Description:</span>
+        <p [innerHTML]="jobIdDetails?.description"></p>
+    </div>
+</div>

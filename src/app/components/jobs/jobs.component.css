@@ -1,0 +1,15 @@
+img.companylogo {
+    width: 70px;
+    height: 70px;
+    background-image: unset;
+    background-color: currentColor;
+    mask-size: cover;
+}
+
+.content {
+    padding-left: 10px;
+}
+
+.content~div {
+    font-size: 13px;
+}

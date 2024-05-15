@@ -1,0 +1,27 @@
+<app-dashboard></app-dashboard>
+<div class="w-50 m-auto">
+    <ng-container *ngFor="let item of filteredJobList" class="w-50">
+        <div class="d-flex mt-3">
+            <div class="images">
+                <img [src]="item?.companyLogo" alt="company logo" class="companylogo">
+            </div>
+            <div class="d-flex w-100 m-auto justify-content-between">
+                <div class="content align-self-center">
+                    <span class="fw-bold title" (click)="goToJobDescription(item.id)"> {{ item.title }}</span>
+                    <div>
+                        <span>
+                            Company: {{item?.companyName}}
+                        </span>
+                        <span>
+                            Reference: {{ item?.reference }}
+                        </span>
+                    </div>
+                </div>
+                <div (click)="addToFavourites(item)" [hidden]="componentType === 'favouritesComponent'">
+                    <span   class=" icon-star"    [class.active]="item.hasActive" ></span>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="text-body-tertiary text-center m-5 fw-bold" *ngIf="componentType === 'favouritesComponent'"> {{message}} </p>
+</div>
